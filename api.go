@@ -25,8 +25,7 @@
 // Internal Server Error
 
 /**
- * @apiDefine admin User access only
- * @apiVersion 0.1.0
+ * @apiDefine admin Admin user access only
  * This optional description belong to to the group admin.
  */
 
