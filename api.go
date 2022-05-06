@@ -1,4 +1,3 @@
-// Item not found error
 /**
  * @apiDefine ItemNotFoundError
  *
@@ -10,39 +9,97 @@
  *       "error":  ItemNotFound"
  *     }
  */
+// Item not found error
 
-// Get Item information
 /**
- * @api {get}  Item/:id Request Item information
- * @apiName Ge Item
- * @apiGroup Item
+ * @apiDefine InternalError
+ *
+ * @apiError InternalError There is some internal error.
+ *
+ * @apiErrorExample Error-Response:
+ *     HTTP/1.1 505 Internal Server Error
+ *     {
+ *       "error":  InternalError"
+ *     }
+ */
+// Internal Server Error
+
+/**
+ * @api {get}  /items/:id Get item info
+ * @apiVersion 0.1.0
+ * @apiName GetItem
+ * @apiGroup Items
  *
  * @apiParam {Number} id Items unique ID.
  *
- * @apiSuccess {String} title Firstname of the Item.
- * @apiSuccess {String} lastname  Lastname of the Item.
+ * @apiSuccess {String} title  Title of the Item.
+ * @apiSuccess {Number} price  Price of the Item.
  *
  * @apiSuccessExample Success-Response:
  *     HTTP/1.1 200 OK
  *     {
- *       "firstname": "John",
- *       "lastname": "Doe"
+ *       "id": 1,
+ *		 "title": "Apple",
+ *       "price": "10.5"
  *     }
  *
  * @apiUse ItemNotFoundError
+ * @apiUse InternalError
  */
-// Modify Item information
+// Get Item information
+
 /**
- * @api {put}  Item/ Modify Item information
- * @apiName Pu Item
- * @apiGroup Item
+ * @api {put}  /items Modify item
+ * @apiVersion 0.1.0
+ * @apiName PutItem
+ * @apiGroup Items
  *
- * @apiParam {Number} id          Items unique ID.
- * @apiParam {String} [firstname] Firstname of the Item.
- * @apiParam {String} [lastname]  Lastname of the Item.
+ * @apiParam {Number} id       Items unique ID.
+ * @apiParam {String} [title]  Title of the Item.
+ * @apiParam {Number} [price]  Price of the Item.
  *
  * @apiSuccessExample Success-Response:
  *     HTTP/1.1 200 OK
  *
+ * @apiUse InternalError
+ */
+// Modify Item information
+
+/**
+ * @api {delete}  /items/:id Delete item
+ * @apiVersion 0.1.0
+ * @apiName DeleteItem
+ * @apiGroup Items
+ *
+ * @apiParam {Number} id       Items unique ID.
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+ *
+ * @apiUse InternalError
  * @apiUse ItemNotFoundError
  */
+// Delete Item
+
+/**
+ * @api {get} /items Request all item information
+ * @apiVersion 0.1.0
+ * @apiName GetAllItem
+ * @apiGroup Items
+ *
+ * @apiSuccess {Object[]} items 		List of the Item.
+ * @apiSuccess {Number}   items.id 		Items unique ID.
+ * @apiSuccess {String}   items.title 	Title of the Item.
+ * @apiSuccess {Number}   items.price 	Price of the Item.
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+ *     [{
+ *	   	"id": 1,
+ *		"title": "apple", 
+ *		"price": "10.5"
+ *	   }]
+ *
+ * @apiUse InternalError
+ */
+// Get all item information
