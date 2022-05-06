@@ -1,7 +1,7 @@
 /**
  * @apiDefine ItemNotFoundError
- *
- * @apiError ItemNotFound The id of the Item was not found.
+ * @apiVersion 0.1.0
+ * @apiError ItemNotFound The id of the item was not found.
  *
  * @apiErrorExample Error-Response:
  *     HTTP/1.1 404 Not Found
@@ -13,8 +13,8 @@
 
 /**
  * @apiDefine InternalError
- *
- * @apiError InternalError There is some internal error.
+ * @apiVersion 0.1.0
+ * @apiError InternalError There is an internal error.
  *
  * @apiErrorExample Error-Response:
  *     HTTP/1.1 505 Internal Server Error
@@ -25,21 +25,27 @@
 // Internal Server Error
 
 /**
- * @api {get}  /items/:id Get item info
+ * @apiDefine admin User access only
+ * @apiVersion 0.1.0
+ * This optional description belong to to the group admin.
+ */
+
+/**
+ * @api {get}  /items/:id Get item
  * @apiVersion 0.1.0
  * @apiName GetItem
  * @apiGroup Items
  *
  * @apiParam {Number} id Items unique ID.
  *
- * @apiSuccess {String} title  Title of the Item.
- * @apiSuccess {Number} price  Price of the Item.
+ * @apiSuccess {String} title  Item title.
+ * @apiSuccess {Number} price  Item price.
  *
  * @apiSuccessExample Success-Response:
  *     HTTP/1.1 200 OK
  *     {
  *       "id": 1,
- *		 "title": "Apple",
+ *       "title": "Apple",
  *       "price": "10.5"
  *     }
  *
@@ -53,10 +59,11 @@
  * @apiVersion 0.1.0
  * @apiName PutItem
  * @apiGroup Items
+ * @apiPermission admin
  *
  * @apiParam {Number} id       Items unique ID.
- * @apiParam {String} [title]  Title of the Item.
- * @apiParam {Number} [price]  Price of the Item.
+ * @apiParam {String} [title]  Item title.
+ * @apiParam {Number} [price]  Item price.
  *
  * @apiSuccessExample Success-Response:
  *     HTTP/1.1 200 OK
@@ -82,23 +89,23 @@
 // Delete Item
 
 /**
- * @api {get} /items Request all item information
+ * @api {get} /items Get all items
  * @apiVersion 0.1.0
- * @apiName GetAllItem
+ * @apiName GetAllItems
  * @apiGroup Items
  *
- * @apiSuccess {Object[]} items 		List of the Item.
+ * @apiSuccess {Object[]} items 		Items list.
  * @apiSuccess {Number}   items.id 		Items unique ID.
- * @apiSuccess {String}   items.title 	Title of the Item.
- * @apiSuccess {Number}   items.price 	Price of the Item.
+ * @apiSuccess {String}   items.title 	Item title.
+ * @apiSuccess {Number}   items.price 	Item price.
  *
  * @apiSuccessExample Success-Response:
  *     HTTP/1.1 200 OK
  *     [{
  *	   	"id": 1,
- *		"title": "apple", 
+ *		"title": "apple",
  *		"price": "10.5"
- *	   }]
+ *     }]
  *
  * @apiUse InternalError
  */

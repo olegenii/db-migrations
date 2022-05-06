@@ -1,0 +1,32 @@
+- hosts: all
+  become: true
+  tasks:
+    - name: Wait 100 seconds till all VPS are ready
+      ansible.builtin.wait_for_connection:
+      timeout: 100
+
+- hosts: webserver
+  become: true
+  roles:
+    # - role: go
+    #   tags: go
+    - role: nginx
+      tags: nginx
+  
+  tasks:
+    - name: "Generate apidoc data in {{playbook_dir}}/doc"
+      become: false
+      local_action:
+        module: ansible.builtin.shell
+        chdir: "{{playbook_dir}}"
+        cmd: apidoc -i . -o doc/
+
+    - name: Install rsync for synchronize
+      ansible.builtin.apt:
+        name: rsync
+        state: present
+
+    - name: "Synchronize apidoc data to web server {{ inventory_hostname }}"
+      ansible.builtin.synchronize:
+        src: ./doc
+        dest: "/var/www/{{ inventory_hostname }}/html"

@@ -1,7 +1,7 @@
 {
-    "name": "dev04",
+    "name": "Rebrain",
     "version": "0.1.0",
-    "description": "Rebrain online-store API",
-    "title": "Rebrain online-store API",
+    "description": "Rebrain online store API documentation",
+    "title": "Rebrain online store API documentation",
     "url" : "https://api.oleg-web.devops.rebrain.srwx.net/v1"
 }

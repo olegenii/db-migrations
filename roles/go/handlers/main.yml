@@ -1,0 +1,5 @@
+- name: go_app systemd
+  ansible.builtin.systemd:
+    name: go_app
+    enabled: true
+    state: started

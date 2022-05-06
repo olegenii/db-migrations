@@ -1,0 +1,26 @@
+- name: Create a directory if it does not exist
+  ansible.builtin.file:
+    path: /app
+    state: directory
+    mode: '0755'
+
+- name: Copy web app to VPS
+  ansible.builtin.copy:
+    src: web
+    dest: /app/web
+    owner: root
+    group: root
+    mode: '0755'
+  notify: go_app systemd
+
+# - name: Start web server
+#   ansible.builtin.shell: nohup /app/web &
+
+- name: Register Go app as a service
+  ansible.builtin.copy:
+    src: go_app.service
+    dest: /lib/systemd/system/go_app.service
+    owner: root
+    group: root
+    mode: '0644'
+  notify: go_app systemd

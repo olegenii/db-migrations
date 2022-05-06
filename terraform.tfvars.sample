@@ -1,0 +1,23 @@
+# Add an AWS access tokens
+aws_access_key = "your_access_key"
+aws_secret_key = "your_secret_key"
+
+# Add an AWS Route53 Zone and Record name
+aws_route53_zone = "your.zo.ne"
+aws_route53_record_name = "your_record"
+
+# Add file and template names
+file_out = "your_filename.txt"
+file_in = "your_template.tftpl"
+
+# Add server name list
+# Add server name list like *name-type*
+# web - for webservers, lb - for load balancer
+vps_list = ["lb-vps1", "web-vps2"]
+
+# # Add GCP project ID
+gcp_project_id="ansible-13"
+
+# # Add GCP ssh pubkey info
+gcp_ssh_pub_key_file = "/path/to/ssh-key.pub"
+gcp_ssh_user = "your_vps_username"
