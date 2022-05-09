@@ -6,15 +6,12 @@
 
 - name: Copy web app to VPS
   ansible.builtin.copy:
-    src: web
-    dest: /app/web
+    src: api
+    dest: /app/api
     owner: root
     group: root
     mode: '0755'
   notify: go_app systemd
-
-# - name: Start web server
-#   ansible.builtin.shell: nohup /app/web &
 
 - name: Register Go app as a service
   ansible.builtin.copy:

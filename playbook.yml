@@ -8,10 +8,12 @@
 - hosts: webserver
   become: true
   roles:
-    # - role: go
-    #   tags: go
+    - role: go
+      tags: go
     - role: nginx
       tags: nginx
+    - role: postgres
+      tags: postgres
   
   tasks:
     - name: "Generate apidoc data in {{playbook_dir}}/doc"

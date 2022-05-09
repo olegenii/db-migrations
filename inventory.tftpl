@@ -18,3 +18,5 @@ all:
           ansible_user: ${gcp_user}
 %{ endif ~}
 %{ endfor ~}
+  vars:
+    ansible_python_interpreter: "/usr/bin/python3"

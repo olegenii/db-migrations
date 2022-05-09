@@ -1,5 +1,5 @@
 [Unit]
-Description=My simple web server on Go
+Description=My simple API web server on Go
 After=network.target
 
 [Service]
@@ -7,7 +7,7 @@ Type=simple
 Restart=always
 RestartSec=5s
 WorkingDirectory=/app
-ExecStart=/app/web
+ExecStart=/app/api
 User=root
 Group=root
 

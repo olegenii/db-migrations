@@ -41,7 +41,7 @@ resource "google_compute_firewall" "default" {
 
   allow {
     protocol = "tcp"
-    ports    = ["80", "22", "8080"]
+    ports    = ["80", "22", "8080", "5432"]
   }
 
   source_tags = ["web"]
@@ -102,6 +102,16 @@ resource "aws_route53_record" "web" {
   for_each = google_compute_instance.vm_instance
   zone_id = data.aws_route53_zone.selected.zone_id
   name = each.value.name
+  type    = "A"
+  ttl     = "300"
+  records = [each.value.network_interface.0.access_config.0.nat_ip]
+}
+
+# Create DNS record for api backend webservers
+resource "aws_route53_record" "api" {
+  for_each = google_compute_instance.vm_instance
+  zone_id = data.aws_route53_zone.selected.zone_id
+  name = "api.${each.value.name}"
   type    = "A"
   ttl     = "300"
   records = [each.value.network_interface.0.access_config.0.nat_ip]
