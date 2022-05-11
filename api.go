@@ -140,7 +140,7 @@ func main() {
 	fmt.Println("Starting server...")
 	var err error
 
-	db, err = sql.Open("postgres", "host=oleg-web.devops.rebrain.srwx.net user=api password=GQt5MTyVPuf9vsVWoWDT9YCn dbname=api sslmode=disable")
+	db, err = sql.Open("postgres", "host=oleg-web.devops.rebrain.srwx.net user=api password=GQt5MTyVPuf9vsVWoWDT9YCn dbname=api_test sslmode=disable")
 	CheckError(err)
 	defer db.Close()
 
