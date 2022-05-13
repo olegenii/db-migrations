@@ -9,7 +9,7 @@ VALUES
 INSERT INTO 
     "items" ("title","price","WarehouseID")
 VALUES 
-    ('apple', 89.5, 1),
-    ('banana', 77, 3),
-    ('orange', 120, 1),
-    ('tomato', 300, 1);
+    ('apple', 89.5, lastval()),
+    ('banana', 77, lastval()),
+    ('orange', 120, lastval()),
+    ('tomato', 300, lastval());

@@ -6,9 +6,39 @@ This project use `postgres-14` as database.
 File `api.go` - is a web server with [API](http://api.oleg-web.devops.rebrain.srwx.net).
 Check API docs on [http://oleg-web.devops.rebrain.srwx.net/doc](http://oleg-web.devops.rebrain.srwx.net/doc). It contains apidoc instructions for creating simple API documentation by `apidoc` command. Then ansible copy it to previously created VPS.
 
-There are 2 migration files use [gorn](https://gorm.io/) library in folder `migrations`:
-1. `migration1.go` - create `items` table with sample data - __db version 0.1.0__
-2. `migration2.go` - create `warehouse` table with sample data and add `warehouse_id` column as FK to `items` table - __db version 0.2.0__
+There are `makefile` and 6 sql migrations files created by [migrate](https://github.com/golang-migrate/migrate/tree/master/cmd/migrate) library in folder `db/migration` with seq prefix and description in their names.
+
+up migrations:
+1. `000001_init_schema.up.sql` - create `items` table
+2. `000002_init_schema.up.sql` - create `warehouses` table and add `warehouse_id` column as FK to `items` table
+3. `000003_sample_data.up.sql` - add sample data to `warehouse` and `items` tables
+
+down migrations:
+1. `000001_init_schema.down.sql` - drop `items` table
+2. `000002_init_schema.down.sql` - drop `warehouses` table and drop `warehouse_id` column
+3. `000003_sample_data.down.sql` - truncate `warehouse` and `items` tables
+
+
+For 1 step up migration use
+```sh
+make migratestepup 
+```
+For 1 step down migration use
+```sh
+make migratestepdown 
+```
+For migration up
+```sh
+make migrateup 
+```
+For migration down
+```sh
+make migratedown 
+```
+For atabase drop 
+```sh
+make migratedrop
+```
 
 Terraform `main.tf` file creates 1 VPS and export `playbook.yml` ansible inventory file and then **Ansible** playbook with __nginx__, __postgres__, __go__ roles come into play.
 
