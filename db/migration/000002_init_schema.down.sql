@@ -1,0 +1,4 @@
+ALTER TABLE "items"
+    DROP IF EXISTS "WarehouseID" CASCADE;
+
+DROP TABLE IF EXISTS "warehouses";
